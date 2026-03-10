@@ -1,6 +1,14 @@
 {
   "name": "china-vs-rest-of-the-world",
   "version": "1.0.0",
+  "scripts": {
+    "start": "node src/server/index.js",
+    "build": "node build/scripts/build.js",
+    "server": "node src/server/prod.js",
+    "clean": "rm -rf public",
+    "test": "node --test test/integration.test.js",
+    "test:dev": "node --test test/dev-server.test.js"
+  },
   "description": "A static website showing data comparisons between China and the rest of the world",
   "keywords": [
     "china",
@@ -23,14 +31,6 @@
   "main": "src/server/index.js",
   "directories": {
     "test": "test"
-  },
-  "scripts": {
-    "start": "node src/server/index.js",
-    "build": "node build/scripts/build.js",
-    "server": "node src/server/prod.js",
-    "clean": "rm -rf public",
-    "test": "node --test test/integration.test.js",
-    "test:dev": "node --test test/dev-server.test.js"
   },
   "dependencies": {
     "accepts": "^2.0.0",

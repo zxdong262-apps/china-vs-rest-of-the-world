@@ -119,3 +119,4 @@ dist
 ftp-root
 *.asc
 /electron-builder.json
+/public
