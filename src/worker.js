@@ -13,14 +13,14 @@ export default {
       path = path + ".html";
     }
 
-    // Try ASSETS binding (provided by Workers Sites)
+    // Try ASSETS binding (provided by Workers Static Assets)
     try {
-      const response = await ASSETS.fetch(request);
+      const response = await env.ASSETS.fetch(request);
       return response;
     } catch (e) {
       // Fallback to index.html for SPA
       try {
-        const indexResponse = await ASSETS.fetch(new URL("/index.html", request.url));
+        const indexResponse = await env.ASSETS.fetch(new URL("/index.html", request.url));
         return indexResponse;
       } catch (e2) {
         return new Response("Error: " + e2.message, { status: 500 });
