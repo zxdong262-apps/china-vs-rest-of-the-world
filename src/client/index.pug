@@ -34,6 +34,8 @@ html(lang=currentLocale)
             table.data-table
               thead
                 tr
+                  th.table-header-url(colspan=7) #{window.location.href}
+                tr
                   th= locale.dataTable.category || 'Category'
                   th= locale.regions.china
                   th(colspan=2)= locale.regions.china + ' %'
@@ -78,8 +80,7 @@ html(lang=currentLocale)
     
     //- Include Footer
     include footer
-    
+
     //- Include Footer JS
     include footer-js
-    
     script(src='/js/background.js')
