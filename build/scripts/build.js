@@ -8,6 +8,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import pug from 'pug';
+import { spawn } from 'child_process';
 import data from '../../src/data/index.js';
 import locales from '../../src/locales/index.js';
 import metrics from '../../src/data/metrics.js';
@@ -60,8 +61,29 @@ async function build() {
     console.log('Copied static assets');
   }
   
+  // Generate images
+  await generateImages();
+  
   console.log('Build complete!');
   console.log(`Output directory: ${BUILD_DIR}`);
+}
+
+function generateImages() {
+  return new Promise((resolve, reject) => {
+    const scriptPath = path.join(__dirname, 'generate-image.js');
+    const child = spawn('node', [scriptPath], {
+      env: { ...process.env, PORT: '8081' },
+      stdio: 'inherit'
+    });
+    child.on('close', (code) => {
+      if (code === 0) {
+        resolve();
+      } else {
+        reject(new Error(`Image generation failed with code ${code}`));
+      }
+    });
+    child.on('error', reject);
+  });
 }
 
 build().catch(err => {
