@@ -6,6 +6,8 @@
 
 一个展示中国与世界其他国家统计数据对比的静态网站。
 
+URL: [https://china-vs-rest-of-the-world.html5beta.com/](https://china-vs-rest-of-the-world.html5beta.com/)
+
 ![中国 vs 世界其他国家](https://china-vs-rest-of-the-world.html5beta.com/images/china-vs-rest-of-world-zh_CN.png)
 
 ## 数据来源
