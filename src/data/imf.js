@@ -68,4 +68,4 @@ const imfData = {
   }
 };
 
-module.exports = imfData;
+export default imfData;

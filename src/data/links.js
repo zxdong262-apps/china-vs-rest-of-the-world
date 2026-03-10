@@ -32,25 +32,15 @@ const links = {
   
   // Development tools and resources
   tools: {
-    nodejs: {
-      name: 'Node.js',
-      url: 'https://nodejs.org/',
-      description: 'JavaScript runtime'
+    electerm: {
+      name: 'Electerm',
+      url: 'https://electerm.html5beta.com',
+      description: 'Terminal/SSH/Sftp/Telnet/Serial/RDP/VNC/Spice client for Mac, Windows, and Linux'
     },
-    express: {
-      name: 'Express.js',
-      url: 'https://expressjs.com/',
-      description: 'Fast, unopinionated web framework'
-    },
-    pug: {
-      name: 'Pug',
-      url: 'https://pugjs.org/',
-      description: 'Template engine'
-    },
-    cloudflare: {
-      name: 'Cloudflare Pages',
-      url: 'https://pages.cloudflare.com/',
-      description: 'Frontend platform for developers'
+    'html5beta.com': {
+      name: 'html5beta.com',
+      url: 'https://html5beta.com',
+      description: 'author homepage'
     }
   },
   
@@ -58,10 +48,10 @@ const links = {
   project: {
     github: {
       name: 'GitHub Repository',
-      url: 'https://github.com/',
+      url: 'https://github.com/zxdong262-apps/china-vs-rest-of-the-world',
       description: 'Source code hosting'
     }
   }
 };
 
-module.exports = links;
+export default links;

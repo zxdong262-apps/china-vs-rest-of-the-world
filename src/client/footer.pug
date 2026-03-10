@@ -5,19 +5,28 @@ footer.footer
       .footer-section
         h3= locale.footer.title
         ul.footer-links
-          li
-            a(href=data.links.dataSources.worldBank.url, target='_blank', rel='noopener')= data.links.dataSources.worldBank.name
-          li
-            a(href=data.links.dataSources.imf.url, target='_blank', rel='noopener')= data.links.dataSources.imf.name
-          li
-            a(href=data.links.dataSources.chinaGov.url, target='_blank', rel='noopener')= data.links.dataSources.chinaGov.name
+          each source, key in data.links.dataSources
+            li
+              a(href=source.url, target='_blank', rel='noopener')= source.name
+      .footer-section
+        h3= locale.footer.tools
+        ul.footer-links
+          each source, key in data.links.tools
+            li
+              a(href=source.url, target='_blank', rel='noopener')= source.name
+      .footer-section
+        h3= locale.footer.project
+        ul.footer-links
+          each source, key in data.links.project
+            li
+              a(href=source.url, target='_blank', rel='noopener')= source.name
       .footer-section
         h3= locale.nav.language
         ul.footer-links
           li
-            a(href='?lang=en_US') English
+            a(href='/') English
           li
-            a(href='?lang=zh_CN') 中文
+            a(href='/zh_CN') 中文
     .footer-bottom
       p= locale.footer.disclaimer
       p &copy; 2024 China vs Rest of the World. #{locale.footer.copyright}

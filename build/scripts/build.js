@@ -4,12 +4,16 @@
  * Builds the static site using Pug templates
  */
 
-const fs = require('fs-extra');
-const path = require('path');
-const pug = require('pug');
-const data = require('../../src/data');
-const locales = require('../../src/locales');
-const { metrics: dataItems } = require('../../src/data/metrics');
+import fs from 'fs-extra';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import pug from 'pug';
+import data from '../../src/data/index.js';
+import locales from '../../src/locales/index.js';
+import metrics from '../../src/data/metrics.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const BUILD_DIR = path.join(__dirname, '../../public');
 const CLIENT_DIR = path.join(__dirname, '../../src/client');
@@ -39,10 +43,11 @@ async function build() {
       currentLocale: localeCode,
       locale: locale,
       data: data.all,
-      dataItems: dataItems,
+      dataItems: metrics.metrics,
       getDataByPath: getDataByPath
     });
     
+    // Output path: index.html for en_US, zh_CN/index.html for zh_CN
     const outputPath = path.join(BUILD_DIR, localeCode === 'en_US' ? 'index.html' : `${localeCode}/index.html`);
     await fs.outputFile(outputPath, html);
     console.log(`Built: ${outputPath}`);
@@ -53,27 +58,6 @@ async function build() {
   if (await fs.pathExists(publicDir)) {
     await fs.copy(publicDir, BUILD_DIR);
     console.log('Copied static assets');
-  }
-  
-  // Create language switcher HTML files
-  for (const localeCode of supportedLocales) {
-    const locale = locales.getLocale(localeCode);
-    const html = compiledTemplate({
-      currentLocale: localeCode,
-      locale: locale,
-      data: data.all,
-      dataItems: dataItems,
-      getDataByPath: getDataByPath
-    });
-    
-    // Copy to root for default locale
-    if (localeCode === 'en_US') {
-      await fs.ensureDir(path.join(BUILD_DIR, 'en'));
-      await fs.copy(
-        path.join(BUILD_DIR, 'index.html'),
-        path.join(BUILD_DIR, 'en/index.html')
-      );
-    }
   }
   
   console.log('Build complete!');

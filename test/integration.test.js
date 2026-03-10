@@ -4,11 +4,15 @@
  * Tests to verify the site is working as expected
  */
 
-const { test, describe, before, after } = require('node:test');
-const assert = require('node:assert');
-const http = require('http');
-const fs = require('fs');
-const path = require('path');
+import { test, describe } from 'node:test';
+import assert from 'node:assert';
+import http from 'node:http';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Configuration
 const DEV_PORT = 3000;
@@ -76,7 +80,7 @@ describe('Build Output Tests', () => {
 });
 
 describe('Data Module Tests', () => {
-  const data = require('../src/data');
+  const data = (await import('../src/data/index.js')).default;
   
   test('data module should have worldBank data', () => {
     assert.ok(data.worldBank, 'Should have worldBank data');
@@ -101,7 +105,7 @@ describe('Data Module Tests', () => {
 });
 
 describe('Locale Tests', () => {
-  const locales = require('../src/locales');
+  const locales = (await import('../src/locales/index.js')).default;
   
   test('should support en_US locale', () => {
     const locale = locales.getLocale('en_US');

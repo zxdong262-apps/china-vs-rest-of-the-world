@@ -103,13 +103,59 @@ body {
   font-size: 0.9rem;
 }
 
+.has-dropdown {
+  position: relative;
+}
+
+.language-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.language-dropdown-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.language-icon {
+  display: block;
+}
+
+.github-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.8);
+  transition: var(--transition);
+}
+
+.github-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.github-icon {
+  display: block;
+}
+
 .navbar-dropdown {
   display: none;
   position: absolute;
+  top: 100%;
+  right: 0;
   background: var(--card-bg);
   border-radius: 4px;
   box-shadow: var(--shadow);
-  min-width: 120px;
+  min-width: 100px;
+  z-index: 1000;
 }
 
 .has-dropdown:hover .navbar-dropdown {
@@ -118,12 +164,18 @@ body {
 
 .navbar-dropdown .navbar-item {
   color: var(--text-color);
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
   display: block;
+  transition: var(--transition);
 }
 
 .navbar-dropdown .navbar-item:hover {
   background: var(--bg-color);
+}
+
+.navbar-dropdown .navbar-item.active {
+  color: var(--primary-color);
+  font-weight: 600;
 }
 
 /* Language Switcher */
@@ -238,6 +290,13 @@ body {
   color: #fff;
   font-size: 1.1rem;
   font-weight: 600;
+}
+
+.unit-label {
+  font-size: 0.75rem;
+  font-weight: 400;
+  opacity: 0.7;
+  margin-left: 4px;
 }
 
 .data-card-body {
@@ -412,11 +471,11 @@ body {
   padding: 0.75rem 1rem;
   text-align: left;
   border-bottom: 1px solid var(--border-color);
+  background: var(--card-bg);
 }
 
 .data-table th {
-  background: var(--secondary-color);
-  color: #fff;
+  color: var(--text-color);
   font-weight: 600;
   white-space: nowrap;
 }
@@ -431,6 +490,13 @@ body {
 
 .data-table td.category {
   font-weight: 500;
+}
+
+.data-table td.category .unit-label {
+  font-size: 0.7rem;
+  font-weight: 400;
+  opacity: 0.6;
+  margin-left: 3px;
 }
 
 .data-table td.china {

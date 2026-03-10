@@ -2,7 +2,7 @@
  * English (US) Locale
  */
 
-module.exports = {
+export default {
   // Site information
   site: {
     title: 'China vs Rest of the World',
@@ -87,7 +87,23 @@ module.exports = {
     trillionRmb: 'trillion RMB',
     billionM3: 'billion m³',
     usd: 'USD',
-    millionTonnesSCE: 'million tonnes SCE'
+    millionTonnesSCE: 'million tonnes SCE',
+    'trillion USD': 'trillion USD',
+    'billion USD': 'billion USD',
+    'million tonnes': 'million tonnes',
+    'million km²': 'million km²',
+    'TWh': 'TWh',
+    'billion tonnes': 'billion tonnes',
+    'km': 'km',
+    'GW': 'GW',
+    'million vehicles': 'million vehicles',
+    'million units': 'million units',
+    'million CGT': 'million CGT',
+    'thousand units': 'thousand units',
+    'million tonnes SCE': 'million tonnes SCE',
+    'trillion RMB': 'trillion RMB',
+    'billion m³': 'billion m³',
+    'USD': 'USD'
   },
   
   // Source information
@@ -100,6 +116,8 @@ module.exports = {
   // Footer
   footer: {
     title: 'Data Sources',
+    tools: 'Tools',
+    project: 'Project',
     disclaimer: 'Data is for informational purposes only. Please verify with official sources.',
     copyright: 'All rights reserved.'
   },

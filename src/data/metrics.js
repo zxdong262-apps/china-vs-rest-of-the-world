@@ -27,10 +27,9 @@ const metrics = [
   { key: 'mobilePhones', path: 'manufacturing.mobilePhones', category: 'mobile' },
   { key: 'shipbuilding', path: 'manufacturing.shipbuilding', category: 'shipbuilding' },
   { key: 'expressway', path: 'transportation.expressway', category: 'transport' },
-  { key: 'highSpeedRail', path: 'transportation.highSpeedRail', category: 'rail' },
-  { key: 'co2Emissions', path: 'co2Emissions', category: 'environment' }
+  { key: 'highSpeedRail', path: 'transportation.highSpeedRail', category: 'rail' }
 ];
 
-module.exports = {
+export default {
   metrics
 };

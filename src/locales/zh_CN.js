@@ -2,7 +2,7 @@
  * 简体中文语言包
  */
 
-module.exports = {
+export default {
   // 站点信息
   site: {
     title: '中国 vs 世界其他国家',
@@ -87,7 +87,23 @@ module.exports = {
     trillionRmb: '万亿人民币',
     billionM3: '十亿立方米',
     usd: '美元',
-    millionTonnesSCE: '百万吨标准煤'
+    millionTonnesSCE: '百万吨标准煤',
+    'trillion USD': '万亿美元',
+    'billion USD': '十亿美元',
+    'million tonnes': '百万吨',
+    'million km²': '百万平方公里',
+    'TWh': '太瓦时',
+    'billion tonnes': '十亿吨',
+    'km': '公里',
+    'GW': '吉瓦',
+    'million vehicles': '万辆',
+    'million units': '百万台',
+    'million CGT': '万总吨',
+    'thousand units': '千台',
+    'million tonnes SCE': '百万吨标准煤',
+    'trillion RMB': '万亿人民币',
+    'billion m³': '十亿立方米',
+    'USD': '美元'
   },
   
   // 来源信息
@@ -100,6 +116,8 @@ module.exports = {
   // 页脚
   footer: {
     title: '数据来源',
+    tools: '工具',
+    project: '项目',
     disclaimer: '数据仅供信息参考，请以官方来源为准。',
     copyright: '保留所有权利。'
   },

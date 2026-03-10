@@ -5,8 +5,9 @@
  * Note: These tests require the dev server to be running on port 3000
  */
 
-const { test, describe } = require('node:test');
-const assert = require('node:assert');
+import { test, describe } from 'node:test';
+import assert from 'node:assert';
+import http from 'node:http';
 
 const DEV_PORT = 3000;
 const DEV_URL = `http://localhost:${DEV_PORT}`;

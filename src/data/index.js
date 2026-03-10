@@ -4,10 +4,10 @@
  * Central export point for all data modules
  */
 
-const worldBankData = require('./world-bank');
-const imfData = require('./imf');
-const chinaGovData = require('./china-gov');
-const links = require('./links');
+import worldBankData from './world-bank.js';
+import imfData from './imf.js';
+import chinaGovData from './china-gov.js';
+import links from './links.js';
 
 // Combine all data into a single object
 const allData = {
@@ -17,7 +17,7 @@ const allData = {
   links
 };
 
-module.exports = {
+export default {
   worldBank: worldBankData,
   imf: imfData,
   chinaGov: chinaGovData,

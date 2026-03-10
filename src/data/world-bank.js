@@ -65,17 +65,7 @@ const worldBankData = {
     source: 'World Steel Association',
     year: 2024,
     unit: 'million tonnes'
-  },
-  
-  // CO2 emissions (2023, in billion tonnes)
-  co2Emissions: {
-    china: 11.8,
-    restOfWorld: 34.5,
-    world: 46.3,
-    source: 'World Bank',
-    year: 2023,
-    unit: 'billion tonnes'
   }
 };
 
-module.exports = worldBankData;
+export default worldBankData;

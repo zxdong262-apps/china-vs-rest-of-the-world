@@ -2,20 +2,19 @@
 mixin dataCard(key, item)
   .data-card
     .data-card-header
-      h3.data-card-title= locale.data[key]
+      h3.data-card-title
+        | #{locale.data[key]}
+        span.unit-label  (#{locale.units[item.unit] || item.unit})
     .data-card-body
       .data-row
         .data-label= locale.regions.china
         .data-value.china-value #{item.china}
-          span.unit= locale.units[item.unit] || item.unit
       .data-row
         .data-label= locale.regions.restOfWorld
         .data-value #{item.restOfWorld}
-          span.unit= locale.units[item.unit] || item.unit
       .data-row
         .data-label= locale.regions.world
         .data-value #{item.world}
-          span.unit= locale.units[item.unit] || item.unit
     .data-card-footer
       span.source= locale.source.source + ': ' + item.source + ' (' + item.year + ')'
 
@@ -23,20 +22,19 @@ mixin dataCard(key, item)
 mixin agricultureCard(key, item)
   .data-card
     .data-card-header
-      h3.data-card-title= locale.data[key]
+      h3.data-card-title
+        | #{locale.data[key]}
+        span.unit-label  (#{locale.units[item.unit] || item.unit})
     .data-card-body
       .data-row
         .data-label= locale.regions.china
         .data-value.china-value #{item.china}
-          span.unit= locale.units[item.unit] || item.unit
       .data-row
         .data-label= locale.regions.restOfWorld
         .data-value #{item.restOfWorld}
-          span.unit= locale.units[item.unit] || item.unit
       .data-row
         .data-label= locale.regions.world
         .data-value #{item.world}
-          span.unit= locale.units[item.unit] || item.unit
     .data-card-footer
       span.source= locale.source.source + ': ' + item.source + ' (' + item.year + ')'
 
@@ -44,19 +42,18 @@ mixin agricultureCard(key, item)
 mixin transportCard(key, item)
   .data-card
     .data-card-header
-      h3.data-card-title= locale.data[key]
+      h3.data-card-title
+        | #{locale.data[key]}
+        span.unit-label  (#{locale.units[item.unit] || item.unit})
     .data-card-body
       .data-row
         .data-label= locale.regions.china
         .data-value.china-value #{item.china.toLocaleString()}
-          span.unit= locale.units[item.unit] || item.unit
       .data-row
         .data-label= locale.regions.restOfWorld
         .data-value #{item.restOfWorld.toLocaleString()}
-          span.unit= locale.units[item.unit] || item.unit
       .data-row
         .data-label= locale.regions.world
         .data-value #{item.world.toLocaleString()}
-          span.unit= locale.units[item.unit] || item.unit
     .data-card-footer
       span.source= locale.source.source + ': ' + item.source + ' (' + item.year + ')'

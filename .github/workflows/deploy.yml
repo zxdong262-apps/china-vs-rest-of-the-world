@@ -4,11 +4,22 @@ on:
   push:
     branches:
       - main
-  release:
-    types:
-      - published
 
 jobs:
+  check-skip-ci:
+    runs-on: ubuntu-latest
+    outputs:
+      should_skip: ${{ steps.check.outputs.should_skip }}
+    steps:
+      - id: check
+        name: Check if [skip ci] is in commit message
+        run: |
+          if echo "${{ github.event.head_commit.message || '' }}" | grep -i '\[skip ci\]'; then
+            echo "should_skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "should_skip=false" >> $GITHUB_OUTPUT
+          fi
+
   build-and-deploy:
     runs-on: ubuntu-latest
     
@@ -19,11 +30,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
       
       - name: Install dependencies
-        run: npm ci
+        run: npm set legacy-peer-deps=true && npm i
       
       - name: Build the site
         run: npm run build

@@ -4,8 +4,8 @@
  * Manages language detection and locale switching
  */
 
-const en_US = require('./en_US');
-const zh_CN = require('./zh_CN');
+import en_US from './en_US.js';
+import zh_CN from './zh_CN.js';
 
 const locales = {
   'en': en_US,
@@ -66,7 +66,7 @@ function getSupportedLocales() {
   return supportedLocales;
 }
 
-module.exports = {
+export default {
   locales,
   supportedLocales,
   supportedLocaleCodes,

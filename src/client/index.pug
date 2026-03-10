@@ -46,20 +46,18 @@ html(lang=currentLocale)
                   - const percent = Math.round(itemData.china / itemData.world * 100);
                   tr
                     td.category
-                      span= itemLabel
+                      span #{itemLabel}
+                      span.unit-label  (#{locale.units[itemData.unit] || itemData.unit})
                     td.china
                       span.value= itemData.china
-                      span.unit= ' ' + (locale.units[itemData.unit] || itemData.unit)
                     td(colspan=2)
                       .percent-bar-container
                         .percent-bar(style='width:' + percent + '%')
                         span.percent-label= percent + '%'
                     td
                       span.value= itemData.restOfWorld
-                      span.unit= ' ' + (locale.units[itemData.unit] || itemData.unit)
                     td
                       span.value= itemData.world
-                      span.unit= ' ' + (locale.units[itemData.unit] || itemData.unit)
                     td= itemData.year
           .download-section
             button.btn-download#downloadTableBtn= locale.dataTable.downloadImage
@@ -74,97 +72,13 @@ html(lang=currentLocale)
             a.a2a_button_whatsapp
             a.a2a_button_telegram
             a.a2a_button_email
-        
-        //- Category Sections (detailed cards)
-        //- Include Mixins
-        include data-card
-        
-        //- Population Section
-        section#population.section
-          h2.section-title= locale.categories.population
-          .data-grid
-            +dataCard('population', data.population)
-            +dataCard('landArea', data.landArea)
-        
-        //- Economy Section
-        section#economy.section
-          h2.section-title= locale.categories.economy
-          .data-grid
-            +dataCard('gdp', data.gdp)
-            +dataCard('gdpGrowth', data.gdpGrowth)
-            +dataCard('gdpPerCapita', data.gdpPerCapita)
-            +dataCard('foreignExchangeReserves', data.foreignExchangeReserves)
-            +dataCard('tradeVolume', data.tradeVolume)
-            +dataCard('currentAccountBalance', data.currentAccountBalance)
-            +dataCard('manufacturingOutput', data.manufacturingOutput)
-        
-        //- Energy Section
-        section#energy.section
-          h2.section-title= locale.categories.energy
-          .data-grid
-            +dataCard('electricityProduction', data.electricityProduction)
-            +dataCard('coalProduction', data.coalProduction)
-            +dataCard('windPower', data.powerCapacity.windPower)
-            +dataCard('solarPower', data.powerCapacity.solarPower)
-        
-        //- Agriculture Section
-        section#agriculture.section
-          h2.section-title= locale.categories.agriculture
-          .data-grid
-            +dataCard('grainProduction', data.agricultureProduction.grain)
-            +dataCard('fertilizer', data.agricultureProduction.fertilizer)
-            +dataCard('porkProduction', data.agricultureProduction.pork)
-            +dataCard('chickenProduction', data.agricultureProduction.chicken)
-            +dataCard('vegetableProduction', data.agricultureProduction.vegetables)
-            +dataCard('fishProduction', data.agricultureProduction.fish)
-            +dataCard('seafoodProduction', data.agricultureProduction.seafood)
-        
-        //- Industry Section
-        section#industry.section
-          h2.section-title= locale.categories.industry
-          .data-grid
-            +dataCard('steelProduction', data.steelProduction)
-            +dataCard('aluminum', data.manufacturing.aluminum)
-            +dataCard('tenNonferrousMetals', data.manufacturing.tenNonferrousMetals)
-            +dataCard('industrialRobots', data.manufacturing.industrialRobots)
-            +dataCard('automobile', data.manufacturing.automobile)
-            +dataCard('newEnergyVehicles', data.manufacturing.newEnergyVehicles)
-            +dataCard('mobilePhones', data.manufacturing.mobilePhones)
-            +dataCard('shipbuilding', data.manufacturing.shipbuilding)
-            +dataCard('industrialOutput', data.industrialOutput)
-        
-        //- Transportation Section
-        section#transportation.section
-          h2.section-title= locale.categories.transportation || 'Transportation'
-          .data-grid
-            +dataCard('expressway', data.transportation.expressway)
-            +dataCard('highSpeedRail', data.transportation.highSpeedRail)
-        
-        //- Environment Section
-        section#environment.section
-          h2.section-title= locale.categories.environment
-          .data-grid
-            +dataCard('co2Emissions', data.co2Emissions)
+            a.a2a_button_weibo
+            a.a2a_button_wechat
     
     //- Include Footer
     include footer
     
+    //- Include Footer JS
+    include footer-js
+    
     script(src='/js/background.js')
-    script(src='https://unpkg.com/html2canvas@1.4.1/dist/html2canvas.min.js')
-    script(src='https://static.addtoany.com/menu/page.js')
-    script.
-      // Download as image functionality
-      document.querySelectorAll('.btn-download').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          const tableContainer = document.querySelector('.table-container');
-          html2canvas(tableContainer, {
-            backgroundColor: '#ffffff',
-            scale: 2
-          }).then(canvas => {
-            const link = document.createElement('a');
-            link.download = 'china-vs-world-data.png';
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-          });
-        });
-      });

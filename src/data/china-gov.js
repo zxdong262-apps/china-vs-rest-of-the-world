@@ -218,13 +218,13 @@ const chinaGovData = {
     },
     highSpeedRail: {
       china: 48000,
-      restOfWorld: 60000,
-      world: 108000,
-      source: 'China Railway',
+      restOfWorld: 20000,
+      world: 68000,
+      source: 'China Railway / UIC',
       year: 2024,
       unit: 'km'
     }
   }
 };
 
-module.exports = chinaGovData;
+export default chinaGovData;

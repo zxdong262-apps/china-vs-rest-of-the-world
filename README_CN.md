@@ -110,7 +110,7 @@ china-vs-rest-of-the-world/
 4. 选择您fork的仓库
 5. 配置构建设置：
    - 构建命令: `npm run build`
-   - 输出目录: `build`
+   - 输出目录: `public`
 6. 点击"保存并部署"
 
 ### 使用GitHub Actions部署
