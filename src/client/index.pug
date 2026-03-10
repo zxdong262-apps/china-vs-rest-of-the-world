@@ -35,8 +35,6 @@ html(lang=currentLocale)
               thead
                 tr
                   th#tableUrl.table-header-url(colspan=7)
-                    script.
-                      document.write(window.location.href);
                 tr
                   th= locale.dataTable.category || 'Category'
                   th= locale.regions.china
@@ -85,5 +83,8 @@ html(lang=currentLocale)
 
     //- Include Footer JS
     include footer-js
+    
+    script.
+      document.getElementById('tableUrl').textContent = window.location.href;
     
 script(src='/js/background.js')
