@@ -1,0 +1,16 @@
+//- Header Component
+header.header
+  .container
+    nav.navbar
+      .navbar-brand
+        a.navbar-item(href='/')
+          h1.logo= locale.header.title
+      .navbar-menu
+        .navbar-end
+          a.navbar-item(href='#population')= locale.categories.population
+          a.navbar-item(href='#economy')= locale.categories.economy
+          a.navbar-item(href='#energy')= locale.categories.energy
+          a.navbar-item(href='#agriculture')= locale.categories.agriculture
+          .navbar-item.language-switcher
+            a.language-link(href='?lang=en_US', class=currentLocale === 'en_US' ? 'active' : '') English
+            a.language-link(href='?lang=zh_CN', class=currentLocale === 'zh_CN' ? 'active' : '') 中文

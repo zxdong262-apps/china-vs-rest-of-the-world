@@ -1,0 +1,23 @@
+//- Footer Component
+footer.footer
+  .container
+    .footer-content
+      .footer-section
+        h3= locale.footer.title
+        ul.footer-links
+          li
+            a(href=data.links.dataSources.worldBank.url, target='_blank', rel='noopener')= data.links.dataSources.worldBank.name
+          li
+            a(href=data.links.dataSources.imf.url, target='_blank', rel='noopener')= data.links.dataSources.imf.name
+          li
+            a(href=data.links.dataSources.chinaGov.url, target='_blank', rel='noopener')= data.links.dataSources.chinaGov.name
+      .footer-section
+        h3= locale.nav.language
+        ul.footer-links
+          li
+            a(href='?lang=en_US') English
+          li
+            a(href='?lang=zh_CN') 中文
+    .footer-bottom
+      p= locale.footer.disclaimer
+      p &copy; 2024 China vs Rest of the World. #{locale.footer.copyright}

@@ -1,0 +1,62 @@
+//- Data Card Component
+mixin dataCard(key, item)
+  .data-card
+    .data-card-header
+      h3.data-card-title= locale.data[key]
+    .data-card-body
+      .data-row
+        .data-label= locale.regions.china
+        .data-value.china-value #{item.china}
+          span.unit= locale.units[item.unit] || item.unit
+      .data-row
+        .data-label= locale.regions.restOfWorld
+        .data-value #{item.restOfWorld}
+          span.unit= locale.units[item.unit] || item.unit
+      .data-row
+        .data-label= locale.regions.world
+        .data-value #{item.world}
+          span.unit= locale.units[item.unit] || item.unit
+    .data-card-footer
+      span.source= locale.source.source + ': ' + item.source + ' (' + item.year + ')'
+
+//- Agriculture Sub Card
+mixin agricultureCard(key, item)
+  .data-card
+    .data-card-header
+      h3.data-card-title= locale.data[key]
+    .data-card-body
+      .data-row
+        .data-label= locale.regions.china
+        .data-value.china-value #{item.china}
+          span.unit= locale.units[item.unit] || item.unit
+      .data-row
+        .data-label= locale.regions.restOfWorld
+        .data-value #{item.restOfWorld}
+          span.unit= locale.units[item.unit] || item.unit
+      .data-row
+        .data-label= locale.regions.world
+        .data-value #{item.world}
+          span.unit= locale.units[item.unit] || item.unit
+    .data-card-footer
+      span.source= locale.source.source + ': ' + item.source + ' (' + item.year + ')'
+
+//- Transportation Sub Card
+mixin transportCard(key, item)
+  .data-card
+    .data-card-header
+      h3.data-card-title= locale.data[key]
+    .data-card-body
+      .data-row
+        .data-label= locale.regions.china
+        .data-value.china-value #{item.china.toLocaleString()}
+          span.unit= locale.units[item.unit] || item.unit
+      .data-row
+        .data-label= locale.regions.restOfWorld
+        .data-value #{item.restOfWorld.toLocaleString()}
+          span.unit= locale.units[item.unit] || item.unit
+      .data-row
+        .data-label= locale.regions.world
+        .data-value #{item.world.toLocaleString()}
+          span.unit= locale.units[item.unit] || item.unit
+    .data-card-footer
+      span.source= locale.source.source + ': ' + item.source + ' (' + item.year + ')'
