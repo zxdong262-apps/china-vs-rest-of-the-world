@@ -73,7 +73,13 @@ async function generateImages() {
   
   const browser = await puppeteer.default.launch({
     headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--font-render-hinting=none',
+      '--disable-font-subpixel-positioning',
+      '--enable-font-antialiasing'
+    ]
   });
   
   try {

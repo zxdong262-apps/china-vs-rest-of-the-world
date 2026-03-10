@@ -6,6 +6,8 @@
 
 A static website showing statistical data comparisons between China and the rest of the world.
 
+![](https://china-vs-rest-of-the-world.html5beta.com/images/china-vs-rest-of-world.png)
+
 ## Data Sources
 
 - [World Bank Open Data](https://data.worldbank.org/)
