@@ -13,53 +13,53 @@ script.
   a2a_config.num_services = 6;
 script(async=true, src='https://static.addtoany.com/menu/page.js')
 
-// Download table as image
-script(src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js')
+// Download table as image (only load html2canvas in dev mode when buttons exist)
 script.
   document.addEventListener('DOMContentLoaded', function() {
     var downloadTableBtnTop = document.getElementById('downloadTableBtnTop');
     var downloadTableBtn = document.getElementById('downloadTableBtn');
-    var dataTableSection = document.getElementById('data-table');
+    var dataTableSection = document.getElementById('table');
     
-    function downloadTableAsImage() {
-      if (!dataTableSection || typeof html2canvas === 'undefined') {
-        console.error('Table section or html2canvas not found');
-        return;
+    // Only set up download functionality if buttons exist (dev mode)
+    if (!downloadTableBtnTop && !downloadTableBtn) {
+      return;
+    }
+    
+    // Load html2canvas on-demand (dev mode only)
+    var html2canvasScript = document.createElement('script');
+    html2canvasScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+    html2canvasScript.onload = function() {
+      attachClickHandlers();
+    };
+    document.head.appendChild(html2canvasScript);
+    
+    function attachClickHandlers() {
+      function downloadTableAsImage() {
+        if (!dataTableSection || typeof html2canvas === 'undefined') {
+          console.error('Table section or html2canvas not found');
+          return;
+        }
+
+        html2canvas(dataTableSection, {
+          backgroundColor: '#ffffff',
+          scale: 2
+        }).then(function(canvas) {
+
+          // Create download link
+          var link = document.createElement('a');
+          link.download = 'china-vs-rest-of-world-' + currentLocale + '.png';
+          link.href = canvas.toDataURL('image/png');
+          link.click();
+        }).catch(function(error) {
+          console.error('Error capturing table:', error);
+        });
       }
       
-      // Hide download buttons temporarily for capture
-      var buttons = dataTableSection.querySelectorAll('.btn-download');
-      buttons.forEach(function(btn) {
-        btn.style.display = 'none';
-      });
-      
-      html2canvas(dataTableSection, {
-        backgroundColor: '#ffffff',
-        scale: 2
-      }).then(function(canvas) {
-        // Restore buttons
-        buttons.forEach(function(btn) {
-          btn.style.display = '';
-        });
-        
-        // Create download link
-        var link = document.createElement('a');
-        link.download = 'china-vs-rest-of-world-' + currentLocale + '.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-      }).catch(function(error) {
-        console.error('Error capturing table:', error);
-        // Restore buttons on error too
-        buttons.forEach(function(btn) {
-          btn.style.display = '';
-        });
-      });
-    }
-    
-    if (downloadTableBtnTop) {
-      downloadTableBtnTop.addEventListener('click', downloadTableAsImage);
-    }
-    if (downloadTableBtn) {
-      downloadTableBtn.addEventListener('click', downloadTableAsImage);
+      if (downloadTableBtnTop) {
+        downloadTableBtnTop.addEventListener('click', downloadTableAsImage);
+      }
+      if (downloadTableBtn) {
+        downloadTableBtn.addEventListener('click', downloadTableAsImage);
+      }
     }
   });

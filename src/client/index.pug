@@ -64,9 +64,10 @@ html(lang=currentLocale, prefix='og: http://ogp.me/ns# website: http://ogp.me/ns
         section#data-table.section(aria-labelledby='data-table-title')
           h2#data-table-title.section-title
             span= locale.dataTable.dataTable
-            button.btn-download.download-btn-top#downloadTableBtnTop(aria-label=locale.dataTable.downloadImage)= locale.dataTable.downloadImage
+            - var buttonId = 'downloadTableBtnTop'
+            include download-button
           .table-container
-            table.data-table(role='table', aria-describedby='table-desc')
+            table.data-table#table(role='table', aria-describedby='table-desc')
               caption.sr-only#table-desc Statistical comparison data between China and the rest of the world
               thead
                 tr
@@ -99,7 +100,8 @@ html(lang=currentLocale, prefix='og: http://ogp.me/ns# website: http://ogp.me/ns
                       span.value= itemData.world
                     td= itemData.year
           .download-section
-            button.btn-download#downloadTableBtn(aria-label=locale.dataTable.downloadImage)= locale.dataTable.downloadImage
+            - var buttonId = 'downloadTableBtn'
+            include download-button
         
         //- Share Section
         .share-section(aria-labelledby='share-title')

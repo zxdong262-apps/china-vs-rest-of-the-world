@@ -87,7 +87,8 @@ async function build() {
       canonicalUrl: canonicalUrl,
       enUrl: enUrl,
       zhCnUrl: zhCnUrl,
-      jsonLd: jsonLd
+      jsonLd: jsonLd,
+      isProduction: true
     });
     
     // Output path: index.html for en_US, zh_CN/index.html for zh_CN
