@@ -22,7 +22,19 @@ const CLIENT_DIR = path.join(__dirname, '../../src/client');
 // Production base URL for SEO
 const PRODUCTION_BASE_URL = 'https://china-vs-rest-of-the-world.html5beta.com';
 
-const supportedLocales = ['en_US', 'zh_CN'];
+const supportedLocales = locales.getSupportedLocales();
+const defaultLocale = supportedLocales[0];
+
+function localeToLanguageTag(localeCode) {
+  return localeCode.replace('_', '-');
+}
+
+function getLocaleUrl(localeCode) {
+  if (localeCode === defaultLocale) {
+    return PRODUCTION_BASE_URL + '/';
+  }
+  return PRODUCTION_BASE_URL + '/' + localeCode;
+}
 
 function getDataByPath(obj, path) {
   return path.split('.').reduce((o, k) => (o || {})[k], obj);
@@ -44,10 +56,8 @@ async function build() {
   for (const localeCode of supportedLocales) {
     const locale = locales.getLocale(localeCode);
     
-    // Generate SEO URLs
-    const enUrl = PRODUCTION_BASE_URL + '/';
-    const zhCnUrl = PRODUCTION_BASE_URL + '/zh_CN';
-    const canonicalUrl = localeCode === 'zh_CN' ? zhCnUrl : enUrl;
+    const localeUrl = getLocaleUrl(localeCode);
+    const canonicalUrl = localeUrl;
     
     // Generate JSON-LD structured data
     const jsonLd = {
@@ -56,7 +66,7 @@ async function build() {
       'name': locale.site.title,
       'description': locale.site.description,
       'url': canonicalUrl,
-      'inLanguage': localeCode === 'zh_CN' ? 'zh-CN' : 'en-US',
+      'inLanguage': localeToLanguageTag(localeCode),
       'publisher': {
         '@type': 'Organization',
         'name': 'China vs Rest of the World',
@@ -85,14 +95,16 @@ async function build() {
       dataItems: metrics.metrics,
       getDataByPath: getDataByPath,
       canonicalUrl: canonicalUrl,
-      enUrl: enUrl,
-      zhCnUrl: zhCnUrl,
+      localeUrl: localeUrl,
+      allLocaleUrls: supportedLocales.reduce((acc, lc) => {
+        acc[lc] = getLocaleUrl(lc);
+        return acc;
+      }, {}),
       jsonLd: jsonLd,
       isProduction: true
     });
     
-    // Output path: index.html for en_US, zh_CN/index.html for zh_CN
-    const outputPath = path.join(BUILD_DIR, localeCode === 'en_US' ? 'index.html' : `${localeCode}/index.html`);
+    const outputPath = path.join(BUILD_DIR, localeCode === defaultLocale ? 'index.html' : `${localeCode}/index.html`);
     await fs.outputFile(outputPath, html);
     console.log(`Built: ${outputPath}`);
   }

@@ -21,6 +21,23 @@ const IMAGES_DIR = path.join(PUBLIC_DIR, 'images');
 // Production base URL
 const PRODUCTION_BASE_URL = 'https://china-vs-rest-of-the-world.html5beta.com';
 
+const supportedLocales = locales.getSupportedLocales();
+const defaultLocale = supportedLocales[0];
+
+function getLocaleUrl(localeCode) {
+  if (localeCode === defaultLocale) {
+    return PRODUCTION_BASE_URL + '/';
+  }
+  return PRODUCTION_BASE_URL + '/' + localeCode + '/';
+}
+
+function getImageFileName(localeCode) {
+  if (localeCode === defaultLocale) {
+    return 'china-vs-rest-of-world.png';
+  }
+  return `china-vs-rest-of-world-${localeCode}.png`;
+}
+
 // Get port from command line or use default
 const PORT = process.env.PORT || 8081;
 
@@ -69,14 +86,12 @@ async function generateImages() {
   });
   
   try {
-    // Get supported locales from the locales module
-    const supportedLocales = locales.getSupportedLocales();
     console.log('Supported locales:', supportedLocales);
     
     for (const localeCode of supportedLocales) {
-      const urlPath = localeCode === 'en_US' ? '/' : `/${localeCode}/`;
+      const urlPath = localeCode === defaultLocale ? '/' : `/${localeCode}/`;
       const fullUrl = `http://localhost:${PORT}${urlPath}`;
-      const productionUrl = localeCode === 'en_US' ? PRODUCTION_BASE_URL : `${PRODUCTION_BASE_URL}/zh_CN/`;
+      const productionUrl = getLocaleUrl(localeCode);
       
       console.log(`Generating image for ${localeCode} from ${fullUrl}...`);
       
@@ -145,7 +160,7 @@ async function generateImages() {
       });
       
       // Save the image
-      const imageFileName = localeCode === 'en_US' ? 'china-vs-rest-of-world.png' : `china-vs-rest-of-world-${localeCode}.png`;
+      const imageFileName = getImageFileName(localeCode);
       const imagePath = path.join(IMAGES_DIR, imageFileName);
       
       await fs.writeFile(imagePath, Buffer.from(imageBuffer, 'base64'));
