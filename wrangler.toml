@@ -1,6 +1,6 @@
 name = "china-vs-rest-of-the-world"
 compatibility_date = "2024-01-01"
-main = "workers-site/index.js"
+main = "src/worker.js"
 
 [site]
 bucket = "./public"
