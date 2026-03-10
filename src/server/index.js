@@ -25,38 +25,34 @@ function getDataByPath(obj, path) {
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '../client'));
 
-// Middleware to set locale based on URL path or query parameter
-app.use((req, res, next) => {
+// Serve static files from public directory
+app.use(express.static(path.join(__dirname, '../client/public')));
+
+// Get supported locales
+const supportedLocales = locales.getSupportedLocales();
+
+// Main route with optional locale parameter
+app.get(['/', '/:locale'], (req, res) => {
+  const baseUrl = `${req.protocol}://${req.get('host')}`;
+  const localeParam = req.params.locale;
+  
+  // Determine locale: use param if provided and supported, otherwise default to en_US
   let localeCode;
-  
-  // Check URL path for locale
-  const pathParts = req.path.split('/').filter(Boolean);
-  if (pathParts[0] === 'zh_CN') {
-    localeCode = 'zh_CN';
+  if (localeParam && supportedLocales.includes(localeParam)) {
+    localeCode = localeParam;
   } else {
-    // Fall back to query parameter or browser preference
-    const browserLang = req.acceptsLanguages('en', 'zh', 'en-US', 'zh-CN') || 'en';
-    localeCode = req.query.lang || browserLang;
-  }
-  
-  // Map locale codes
-  if (localeCode === 'en') localeCode = 'en_US';
-  if (localeCode === 'zh') localeCode = 'zh_CN';
-  if (localeCode === 'en-US') localeCode = 'en_US';
-  if (localeCode === 'zh-CN') localeCode = 'zh_CN';
-  
-  // Fallback to en_US if not supported
-  if (!locales.supportedLocaleCodes.includes(localeCode)) {
     localeCode = 'en_US';
   }
   
   const locale = locales.getLocale(localeCode);
-  const baseUrl = `${req.protocol}://${req.get('host')}`;
   
-  // SEO URLs
-  const enUrl = baseUrl + '/';
-  const zhCnUrl = baseUrl + '/zh_CN';
-  const canonicalUrl = localeCode === 'zh_CN' ? zhCnUrl : enUrl;
+  // Generate locale URLs
+  const localeUrls = {};
+  supportedLocales.forEach((code) => {
+    localeUrls[code] = code === 'en_US' ? baseUrl + '/' : baseUrl + '/' + code;
+  });
+  
+  const canonicalUrl = localeUrls[localeCode];
   
   // JSON-LD Structured Data
   const jsonLd = {
@@ -65,7 +61,7 @@ app.use((req, res, next) => {
     'name': locale.site.title,
     'description': locale.site.description,
     'url': canonicalUrl,
-    'inLanguage': localeCode === 'zh_CN' ? 'zh-CN' : 'en-US',
+    'inLanguage': localeCode.replace('_', '-'),
     'publisher': {
       '@type': 'Organization',
       'name': 'China vs Rest of the World',
@@ -87,29 +83,17 @@ app.use((req, res, next) => {
     }
   };
   
+  // Set locals for template
   res.locals.currentLocale = localeCode;
   res.locals.locale = locale;
+  res.locals.supportedLocales = supportedLocales;
   res.locals.data = data.all;
   res.locals.dataItems = metrics.metrics;
   res.locals.getDataByPath = getDataByPath;
   res.locals.canonicalUrl = canonicalUrl;
-  res.locals.enUrl = enUrl;
-  res.locals.zhCnUrl = zhCnUrl;
+  res.locals.localeUrls = localeUrls;
   res.locals.jsonLd = jsonLd;
   
-  next();
-});
-
-// Serve static files from public directory
-app.use(express.static(path.join(__dirname, '../client/public')));
-
-// Main route - English (/)
-app.get('/', (req, res) => {
-  res.render('index');
-});
-
-// Chinese route (/zh_CN)
-app.get('/zh_CN', (req, res) => {
   res.render('index');
 });
 
