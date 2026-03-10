@@ -1,13 +1,47 @@
 //- Main Index Template
 doctype html
-html(lang=currentLocale)
+html(lang=currentLocale, prefix='og: http://ogp.me/ns# website: http://ogp.me/ns/website#')
   head
     meta(charset='UTF-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(name='description', content=locale.site.description)
+    meta(name='keywords', content='China, statistics, population, economy, energy, GDP, world comparison, data, 中国, 统计数据, 经济, 人口')
+    meta(name='author', content='China vs Rest of the World')
+    meta(name='robots', content='index, follow')
+    meta(name='googlebot', content='index, follow')
+    
+    //- Canonical URL
+    link(rel='canonical', href=canonicalUrl)
+    
+    //- Alternate links for internationalization
+    link(rel='alternate', hreflang='en', href=enUrl)
+    link(rel='alternate', hreflang='zh-CN', href=zhCnUrl)
+    link(rel='alternate', hreflang='x-default', href=enUrl)
+    
+    //- Open Graph Meta Tags
+    meta(property='og:type', content='website')
+    meta(property='og:url', content=canonicalUrl)
+    meta(property='og:title', content=locale.site.title)
+    meta(property='og:description', content=locale.site.description)
+    meta(property='og:site_name', content='China vs Rest of the World')
+    meta(property='og:locale', content=currentLocale === 'zh_CN' ? 'zh_CN' : 'en_US')
+    
+    //- Twitter Card Meta Tags
+    meta(name='twitter:card', content='summary_large_image')
+    meta(name='twitter:title', content=locale.site.title)
+    meta(name='twitter:description', content=locale.site.description)
+    
+    //- Theme Color
+    meta(name='theme-color', content='#2563eb')
+    
     title= locale.site.title
     link(rel='stylesheet', href='/css/style.css')
     link(rel='icon', type='image/svg+xml', href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🌏</text></svg>')
+    
+    //- Structured Data (JSON-LD)
+    script(type='application/ld+json')
+      | !{JSON.stringify(jsonLd)}
+    
     script.
       // Set default locale before page loads
       var currentLocale = "#{currentLocale}";
@@ -17,45 +51,47 @@ html(lang=currentLocale)
     //- Include Header
     include header
     
-    main.main-content
+    main.main-content(role='main')
       .container
         //- Hero Section
-        section.hero
+        section.hero(aria-labelledby='hero-title')
           .hero-content
-            h1.hero-title= locale.header.title
+            h1#hero-title.hero-title= locale.header.title
             p.hero-subtitle= locale.header.subtitle
             p.hero-description= locale.site.description
         
         //- Data Table Section
-        section#data-table.section
-          h2.section-title= locale.dataTable.dataTable
-            button.btn-download.download-btn-top#downloadTableBtnTop= locale.dataTable.downloadImage
+        section#data-table.section(aria-labelledby='data-table-title')
+          h2#data-table-title.section-title
+            span= locale.dataTable.dataTable
+            button.btn-download.download-btn-top#downloadTableBtnTop(aria-label=locale.dataTable.downloadImage)= locale.dataTable.downloadImage
           .table-container
-            table.data-table
+            table.data-table(role='table', aria-describedby='table-desc')
+              caption.sr-only#table-desc Statistical comparison data between China and the rest of the world
               thead
                 tr
-                  th#tableUrl.table-header-url(colspan=7)
+                  th#tableUrl.table-header-url(colspan=7, scope='colgroup')
                 tr
-                  th= locale.dataTable.category || 'Category'
-                  th= locale.regions.china
-                  th(colspan=2)= locale.regions.china + ' %'
-                  th= locale.regions.restOfWorld
-                  th= locale.regions.world
-                  th= locale.dataTable.year || 'Year'
+                  th(scope='col')= locale.dataTable.category || 'Category'
+                  th(scope='col')= locale.regions.china
+                  th(colspan=2, scope='colgroup')= locale.regions.china + ' %'
+                  th(scope='col')= locale.regions.restOfWorld
+                  th(scope='col')= locale.regions.world
+                  th(scope='col')= locale.dataTable.year || 'Year'
               tbody
                 each item in dataItems
                   - const itemData = getDataByPath(data, item.path);
                   - const itemLabel = locale.data[item.key];
                   - const percent = Math.round(itemData.china / itemData.world * 100);
                   tr
-                    td.category
+                    th(scope='row').category
                       span #{itemLabel}
                       span.unit-label  (#{locale.units[itemData.unit] || itemData.unit})
                     td.china
                       span.value= itemData.china
                     td(colspan=2)
                       .percent-bar-container
-                        .percent-bar(style='width:' + percent + '%')
+                        .percent-bar(style='width:' + percent + '%', role='progressbar', aria-valuenow=percent, aria-valuemin='0', aria-valuemax='100')
                         span.percent-label= percent + '%'
                     td
                       span.value= itemData.restOfWorld
@@ -63,20 +99,20 @@ html(lang=currentLocale)
                       span.value= itemData.world
                     td= itemData.year
           .download-section
-            button.btn-download#downloadTableBtn= locale.dataTable.downloadImage
+            button.btn-download#downloadTableBtn(aria-label=locale.dataTable.downloadImage)= locale.dataTable.downloadImage
         
         //- Share Section
-        .share-section
-          h3= locale.dataTable.share
-          .a2a_kit.a2a_kit_size_32.a2a_default_style
-            a.a2a_button_facebook
-            a.a2a_button_twitter
-            a.a2a_button_linkedin
-            a.a2a_button_whatsapp
-            a.a2a_button_telegram
-            a.a2a_button_email
-            a.a2a_button_weibo
-            a.a2a_button_wechat
+        .share-section(aria-labelledby='share-title')
+          h3#share-title= locale.dataTable.share
+          .a2a_kit.a2a_kit_size_32.a2a_default_style(role='list', aria-label='Share on social media')
+            a.a2a_button_facebook(role='listitem', aria-label='Share on Facebook')
+            a.a2a_button_twitter(role='listitem', aria-label='Share on Twitter')
+            a.a2a_button_linkedin(role='listitem', aria-label='Share on LinkedIn')
+            a.a2a_button_whatsapp(role='listitem', aria-label='Share on WhatsApp')
+            a.a2a_button_telegram(role='listitem', aria-label='Share on Telegram')
+            a.a2a_button_email(role='listitem', aria-label='Share via Email')
+            a.a2a_button_weibo(role='listitem', aria-label='Share on Weibo')
+            a.a2a_button_wechat(role='listitem', aria-label='Share on WeChat')
     
     //- Include Footer
     include footer

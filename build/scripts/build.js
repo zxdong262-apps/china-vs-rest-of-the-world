@@ -19,6 +19,9 @@ const __dirname = path.dirname(__filename);
 const BUILD_DIR = path.join(__dirname, '../../public');
 const CLIENT_DIR = path.join(__dirname, '../../src/client');
 
+// Production base URL for SEO
+const PRODUCTION_BASE_URL = 'https://china-vs-rest-of-the-world.html5beta.com';
+
 const supportedLocales = ['en_US', 'zh_CN'];
 
 function getDataByPath(obj, path) {
@@ -40,12 +43,51 @@ async function build() {
   // Build for each locale
   for (const localeCode of supportedLocales) {
     const locale = locales.getLocale(localeCode);
+    
+    // Generate SEO URLs
+    const enUrl = PRODUCTION_BASE_URL + '/';
+    const zhCnUrl = PRODUCTION_BASE_URL + '/zh_CN';
+    const canonicalUrl = localeCode === 'zh_CN' ? zhCnUrl : enUrl;
+    
+    // Generate JSON-LD structured data
+    const jsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      'name': locale.site.title,
+      'description': locale.site.description,
+      'url': canonicalUrl,
+      'inLanguage': localeCode === 'zh_CN' ? 'zh-CN' : 'en-US',
+      'publisher': {
+        '@type': 'Organization',
+        'name': 'China vs Rest of the World',
+        'url': PRODUCTION_BASE_URL
+      },
+      'dateModified': new Date().toISOString().split('T')[0],
+      'about': {
+        '@type': 'Thing',
+        'name': 'Statistical Comparison',
+        'description': locale.site.description
+      },
+      'potentialAction': {
+        '@type': 'SearchAction',
+        'target': {
+          '@type': 'EntryPoint',
+          'urlTemplate': `${PRODUCTION_BASE_URL}/?q={search_term_string}`
+        },
+        'query-input': 'required name=search_term_string'
+      }
+    };
+    
     const html = compiledTemplate({
       currentLocale: localeCode,
       locale: locale,
       data: data.all,
       dataItems: metrics.metrics,
-      getDataByPath: getDataByPath
+      getDataByPath: getDataByPath,
+      canonicalUrl: canonicalUrl,
+      enUrl: enUrl,
+      zhCnUrl: zhCnUrl,
+      jsonLd: jsonLd
     });
     
     // Output path: index.html for en_US, zh_CN/index.html for zh_CN

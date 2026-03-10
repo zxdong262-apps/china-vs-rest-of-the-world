@@ -50,11 +50,52 @@ app.use((req, res, next) => {
     localeCode = 'en_US';
   }
   
+  const locale = locales.getLocale(localeCode);
+  const baseUrl = `${req.protocol}://${req.get('host')}`;
+  
+  // SEO URLs
+  const enUrl = baseUrl + '/';
+  const zhCnUrl = baseUrl + '/zh_CN';
+  const canonicalUrl = localeCode === 'zh_CN' ? zhCnUrl : enUrl;
+  
+  // JSON-LD Structured Data
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    'name': locale.site.title,
+    'description': locale.site.description,
+    'url': canonicalUrl,
+    'inLanguage': localeCode === 'zh_CN' ? 'zh-CN' : 'en-US',
+    'publisher': {
+      '@type': 'Organization',
+      'name': 'China vs Rest of the World',
+      'url': baseUrl
+    },
+    'dateModified': new Date().toISOString().split('T')[0],
+    'about': {
+      '@type': 'Thing',
+      'name': 'Statistical Comparison',
+      'description': locale.site.description
+    },
+    'potentialAction': {
+      '@type': 'SearchAction',
+      'target': {
+        '@type': 'EntryPoint',
+        'urlTemplate': `${baseUrl}/?q={search_term_string}`
+      },
+      'query-input': 'required name=search_term_string'
+    }
+  };
+  
   res.locals.currentLocale = localeCode;
-  res.locals.locale = locales.getLocale(localeCode);
+  res.locals.locale = locale;
   res.locals.data = data.all;
   res.locals.dataItems = metrics.metrics;
   res.locals.getDataByPath = getDataByPath;
+  res.locals.canonicalUrl = canonicalUrl;
+  res.locals.enUrl = enUrl;
+  res.locals.zhCnUrl = zhCnUrl;
+  res.locals.jsonLd = jsonLd;
   
   next();
 });
