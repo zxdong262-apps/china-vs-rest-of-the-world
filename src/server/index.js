@@ -17,6 +17,8 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+export { app, PORT };
+
 function getDataByPath(obj, path) {
   return path.split('.').reduce((o, k) => (o || {})[k], obj);
 }
@@ -97,8 +99,13 @@ app.get(['/', '/:locale'], (req, res) => {
   res.render('index');
 });
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Development server running at http://localhost:${PORT}`);
-  console.log(`Open your browser to view the site.`);
-});
+const isMainModule = process.argv[1] === fileURLToPath(import.meta.url);
+
+if (isMainModule) {
+  app.listen(PORT, () => {
+    console.log(`Development server running at http://localhost:${PORT}`);
+    console.log(`Open your browser to view the site.`);
+  });
+}
+
+export default app;

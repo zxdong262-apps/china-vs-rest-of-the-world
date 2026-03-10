@@ -7,9 +7,10 @@
 
 import fs from 'fs-extra';
 import path from 'path';
+import http from 'http';
 import { fileURLToPath } from 'url';
-import express from 'express';
 import locales from '../../src/locales/index.js';
+import serverApp from '../../src/server/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,30 +26,18 @@ const PORT = process.env.PORT || 8081;
 
 function startServer() {
   return new Promise((resolve, reject) => {
-    const app = express();
-    
-    // Serve static files from public directory
-    // For en_US, serve index.html at root
-    app.get('/', (req, res) => {
-      res.sendFile(path.join(PUBLIC_DIR, 'index.html'));
-    });
-    
-    // For zh_CN, serve zh_CN/index.html
-    app.get('/zh_CN', (req, res) => {
-      res.sendFile(path.join(PUBLIC_DIR, 'zh_CN/index.html'));
-    });
-    
-    // Also handle trailing slash
-    app.get('/zh_CN/', (req, res) => {
-      res.sendFile(path.join(PUBLIC_DIR, 'zh_CN/index.html'));
-    });
-    
-    // Serve static files (CSS, JS, images)
-    app.use(express.static(PUBLIC_DIR));
-    
-    const server = app.listen(PORT, () => {
+    const server = serverApp.listen(PORT, () => {
       console.log(`Local server started on port ${PORT}`);
-      resolve(server);
+      
+      const checkServer = () => {
+        const req = http.get(`http://localhost:${PORT}/`, (res) => {
+          resolve(server);
+        });
+        req.on('error', () => {
+          setTimeout(checkServer, 100);
+        });
+      };
+      checkServer();
     });
     
     server.on('error', reject);
@@ -64,9 +53,6 @@ async function generateImages() {
   
   // Start local server
   const server = await startServer();
-  
-  // Wait for server to be ready
-  await new Promise(resolve => setTimeout(resolve, 1000));
   
   // Dynamically import puppeteer
   const puppeteer = await import('puppeteer');
@@ -142,23 +128,18 @@ async function generateImages() {
           document.head.appendChild(script);
         });
         
-        const dataTableSection = document.getElementById('data-table');
-        if (!dataTableSection) {
-          throw new Error('Table section not found');
+        const tableContainer = document.querySelector('#data-table table.data-table');
+        if (!tableContainer) {
+          throw new Error('Table container not found');
         }
         
-        // Hide download buttons temporarily
-        const buttons = dataTableSection.querySelectorAll('.btn-download');
-        buttons.forEach(btn => btn.style.display = 'none');
-        
-        // Use html2canvas to capture
-        const canvas = await html2canvas(dataTableSection, {
+        // Use html2canvas to capture the table container directly
+        const canvas = await html2canvas(tableContainer, {
           backgroundColor: '#ffffff',
-          scale: 2
+          scale: 2,
+          useCORS: true,
+          allowTaint: true
         });
-        
-        // Restore buttons
-        buttons.forEach(btn => btn.style.display = '');
         
         return canvas.toDataURL('image/png').split(',')[1];
       });
