@@ -9,8 +9,8 @@
 const worldBankData = {
   // Population data (2024 estimates in millions)
   population: {
-    china: 1425.0,
-    restOfWorld: 8160.0,
+    china: 1408.0,
+    restOfWorld: 8177.0,
     world: 9585.0,
     source: 'World Bank',
     year: 2024,
