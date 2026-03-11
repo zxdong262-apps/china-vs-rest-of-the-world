@@ -58,6 +58,7 @@ export default {
     fishProduction: 'Fish Production',
     mariculture: 'Mariculture',
     distantWaterFishing: 'Distant Water Fishing',
+    watermelon: 'Watermelon',
     automobile: 'Automobile',
     newEnergyVehicles: 'New Energy Vehicles',
     mobilePhones: 'Mobile Phones',

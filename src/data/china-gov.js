@@ -82,6 +82,14 @@ const chinaGovData = {
       year: 2024,
       unit: 'million tonnes'
     },
+    watermelon: {
+      china: 58.0,
+      restOfWorld: 32.0,
+      world: 90.0,
+      source: 'National Bureau of Statistics of China',
+      year: 2024,
+      unit: 'million tonnes'
+    },
     fertilizer: {
       china: 57.5,
       restOfWorld: 120.0,

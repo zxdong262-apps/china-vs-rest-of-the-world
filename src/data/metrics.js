@@ -24,6 +24,7 @@ const metrics = [
   { key: 'fishProduction', path: 'agricultureProduction.fish', category: 'agricultureFish', icon: '🐟' },
   { key: 'mariculture', path: 'agricultureProduction.mariculture', category: 'agricultureMariculture', icon: '🦪' },
   { key: 'distantWaterFishing', path: 'agricultureProduction.distantWaterFishing', category: 'agricultureFishing', icon: '⚓' },
+  { key: 'watermelon', path: 'agricultureProduction.watermelon', category: 'agricultureWatermelon', icon: '🍉' },
   { key: 'automobile', path: 'manufacturing.automobile', category: 'automobile', icon: '🚗' },
   { key: 'newEnergyVehicles', path: 'manufacturing.newEnergyVehicles', category: 'ev', icon: '🚎' },
   { key: 'mobilePhones', path: 'manufacturing.mobilePhones', category: 'mobile', icon: '📱' },

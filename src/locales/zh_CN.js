@@ -58,6 +58,7 @@ export default {
     fishProduction: '鱼类产量',
     mariculture: '海产养殖',
     distantWaterFishing: '远洋捕捞',
+    watermelon: '西瓜产量',
     automobile: '汽车产量',
     newEnergyVehicles: '新能源汽车产量',
     mobilePhones: '手机产量',
