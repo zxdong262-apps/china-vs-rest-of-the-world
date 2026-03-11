@@ -52,17 +52,25 @@ const chinaGovData = {
     },
     fish: {
       china: 37.2,
-      restOfWorld: 56.8,
-      world: 94.0,
+      restOfWorld: 75.0,
+      world: 112.2,
       source: 'National Bureau of Statistics of China',
       year: 2024,
       unit: 'million tonnes'
     },
-    seafood: {
-      china: 35.6,
-      restOfWorld: 95.4,
-      world: 131.0,
+    mariculture: {
+      china: 37.0,
+      restOfWorld: 28.0,
+      world: 65.0,
       source: 'National Bureau of Statistics of China',
+      year: 2024,
+      unit: 'million tonnes'
+    },
+    distantWaterFishing: {
+      china: 2.19,
+      restOfWorld: 10.0,
+      world: 12.19,
+      source: 'Ministry of Agriculture and Rural Affairs',
       year: 2024,
       unit: 'million tonnes'
     },
