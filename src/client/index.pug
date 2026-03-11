@@ -65,6 +65,7 @@ html(lang=currentLocale, prefix='og: http://ogp.me/ns# website: http://ogp.me/ns
           h2#data-table-title.section-title
             span= locale.dataTable.dataTable
             - var buttonId = 'downloadTableBtnTop'
+            - var btnClass = 'download-btn-top'
             include download-button
           .table-container
             table.data-table#table(role='table', aria-describedby='table-desc')
