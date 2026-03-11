@@ -86,7 +86,7 @@ html(lang=currentLocale, prefix='og: http://ogp.me/ns# website: http://ogp.me/ns
                   - const percent = Math.round(itemData.china / itemData.world * 100);
                   tr
                     th(scope='row').category
-                      span #{itemLabel}
+                      span #{item.icon} #{itemLabel}
                       span.unit-label  (#{locale.units[itemData.unit] || itemData.unit})
                     td.china
                       span.value= itemData.china
