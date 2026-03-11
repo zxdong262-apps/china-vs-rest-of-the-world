@@ -24,7 +24,7 @@ html(lang=currentLocale, prefix='og: http://ogp.me/ns# website: http://ogp.me/ns
     meta(property='og:title', content=locale.site.title)
     meta(property='og:description', content=locale.site.description)
     meta(property='og:site_name', content='China vs Rest of the World')
-    meta(property='og:locale', content=currentLocale === 'zh_CN' ? 'zh_CN' : 'en_US')
+    meta(property='og:locale', content=currentLocale === 'en_US' ? 'en_US' : currentLocale)
     
     //- Twitter Card Meta Tags
     meta(name='twitter:card', content='summary_large_image')
