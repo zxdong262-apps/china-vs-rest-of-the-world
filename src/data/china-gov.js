@@ -34,6 +34,14 @@ const chinaGovData = {
       year: 2024,
       unit: 'million tonnes'
     },
+    eggs: {
+      china: 30.0,
+      restOfWorld: 45.0,
+      world: 75.0,
+      source: 'National Bureau of Statistics of China',
+      year: 2024,
+      unit: 'million tonnes'
+    },
     vegetables: {
       china: 590.0,
       restOfWorld: 650.0,

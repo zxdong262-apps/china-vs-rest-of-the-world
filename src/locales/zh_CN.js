@@ -53,6 +53,7 @@ export default {
     fertilizer: '化肥产量',
     porkProduction: '猪肉产量',
     chickenProduction: '鸡肉产量',
+    eggProduction: '鸡蛋产量',
     vegetableProduction: '蔬菜产量',
     fishProduction: '鱼类产量',
     seafoodProduction: '海产品产量',

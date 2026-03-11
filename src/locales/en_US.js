@@ -53,6 +53,7 @@ export default {
     fertilizer: 'Fertilizer',
     porkProduction: 'Pork Production',
     chickenProduction: 'Chicken Production',
+    eggProduction: 'Egg Production',
     vegetableProduction: 'Vegetable Production',
     fishProduction: 'Fish Production',
     seafoodProduction: 'Seafood Production',

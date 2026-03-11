@@ -19,6 +19,7 @@ const metrics = [
   { key: 'fertilizer', path: 'agricultureProduction.fertilizer', category: 'agricultureFertilizer' },
   { key: 'porkProduction', path: 'agricultureProduction.pork', category: 'agriculturePork' },
   { key: 'chickenProduction', path: 'agricultureProduction.chicken', category: 'agricultureChicken' },
+  { key: 'eggProduction', path: 'agricultureProduction.eggs', category: 'agricultureEgg' },
   { key: 'vegetableProduction', path: 'agricultureProduction.vegetables', category: 'agricultureVegetable' },
   { key: 'fishProduction', path: 'agricultureProduction.fish', category: 'agricultureFish' },
   { key: 'seafoodProduction', path: 'agricultureProduction.seafood', category: 'agricultureSeafood' },
