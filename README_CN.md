@@ -18,4 +18,4 @@ URL: [https://china-vs-rest-of-the-world.html5beta.com/zh_CN/](https://china-vs-
 
 ## 贡献
 
-欢迎贡献！请随时提交Pull Request。
+如果您发现任何数据错误，请随时提交Pull Request来修正数据。
