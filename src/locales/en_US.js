@@ -41,6 +41,7 @@ export default {
     gdp: 'GDP',
     gdpGrowth: 'GDP Growth Rate',
     gdpPerCapita: 'GDP per Capita',
+    ppp: 'GDP (PPP)',
     electricityProduction: 'Electricity Production',
     steelProduction: 'Steel Production',
     coalProduction: 'Coal Production',

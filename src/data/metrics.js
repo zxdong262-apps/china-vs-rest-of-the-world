@@ -6,6 +6,7 @@ const metrics = [
   { key: 'population', path: 'population', category: 'population', icon: '👥' },
   { key: 'landArea', path: 'landArea', category: 'geography', icon: '🌍' },
   { key: 'gdp', path: 'gdp', category: 'economy', icon: '💰' },
+  { key: 'ppp', path: 'ppp', category: 'economy', icon: '⚖️' },
   { key: 'manufacturingOutput', path: 'manufacturingOutput', category: 'industry', icon: '🏭' },
   { key: 'electricityProduction', path: 'electricityProduction', category: 'energy', icon: '⚡' },
   { key: 'windPower', path: 'powerCapacity.windPower', category: 'energy', icon: '💨' },

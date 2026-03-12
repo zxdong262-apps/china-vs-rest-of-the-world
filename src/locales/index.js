@@ -6,6 +6,7 @@
 
 import en_US from './en_US.js';
 import zh_CN from './zh_CN.js';
+import faqData from '../data/faq.js';
 
 const locales = {
   'en': en_US,
@@ -14,6 +15,16 @@ const locales = {
   'zh': zh_CN,
   'zh-CN': zh_CN,
   'zh_CN': zh_CN
+};
+
+en_US.faq = {
+  title: 'Frequently Asked Questions',
+  questions: faqData.en_US
+};
+
+zh_CN.faq = {
+  title: '常见问题',
+  questions: faqData.zh_CN
 };
 
 const supportedLocales = ['en_US', 'zh_CN'];

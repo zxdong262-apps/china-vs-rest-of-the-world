@@ -41,6 +41,7 @@ export default {
     gdp: '国内生产总值',
     gdpGrowth: 'GDP增长率',
     gdpPerCapita: '人均GDP',
+    ppp: '购买力平价GDP',
     electricityProduction: '发电量',
     steelProduction: '钢铁产量',
     coalProduction: '煤炭产量',
@@ -105,6 +106,7 @@ export default {
     'thousand units': '千台',
     'million tonnes SCE': '百万吨标准煤',
     'trillion RMB': '万亿人民币',
+    'trillion Int$': '万亿国际元',
     'billion m³': '十亿立方米',
     'USD': '美元'
   },

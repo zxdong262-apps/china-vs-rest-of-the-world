@@ -37,6 +37,16 @@ const worldBankData = {
     unit: 'trillion USD'
   },
   
+  // GDP PPP (2024, in trillion international dollars)
+  ppp: {
+    china: 30.0,
+    restOfWorld: 70.0,
+    world: 100.0,
+    source: 'IMF',
+    year: 2024,
+    unit: 'trillion Int$'
+  },
+  
   // GDP growth rate (2024, %)
   gdpGrowth: {
     china: 5.0,

@@ -56,33 +56,115 @@ app.get(['/', '/:locale'], (req, res) => {
   
   const canonicalUrl = localeUrls[localeCode];
   
-  // JSON-LD Structured Data
+  // JSON-LD Structured Data - Enhanced for AI (GEO)
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    'name': locale.site.title,
-    'description': locale.site.description,
-    'url': canonicalUrl,
-    'inLanguage': localeCode.replace('_', '-'),
-    'publisher': {
-      '@type': 'Organization',
-      'name': 'China vs Rest of the World',
-      'url': baseUrl
-    },
-    'dateModified': new Date().toISOString().split('T')[0],
-    'about': {
-      '@type': 'Thing',
-      'name': 'Statistical Comparison',
-      'description': locale.site.description
-    },
-    'potentialAction': {
-      '@type': 'SearchAction',
-      'target': {
-        '@type': 'EntryPoint',
-        'urlTemplate': `${baseUrl}/?q={search_term_string}`
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        'name': locale.site.title,
+        'description': locale.site.description,
+        'url': canonicalUrl,
+        'inLanguage': localeCode.replace('_', '-'),
+        'publisher': {
+          '@type': 'Organization',
+          'name': 'China vs Rest of the World',
+          'url': baseUrl
+        },
+        'dateModified': new Date().toISOString().split('T')[0],
+        'about': {
+          '@type': 'Thing',
+          'name': 'Statistical Comparison',
+          'description': locale.site.description
+        },
+        'potentialAction': {
+          '@type': 'SearchAction',
+          'target': {
+            '@type': 'EntryPoint',
+            'urlTemplate': `${baseUrl}/?q={search_term_string}`
+          },
+          'query-input': 'required name=search_term_string'
+        }
       },
-      'query-input': 'required name=search_term_string'
-    }
+      {
+        '@type': 'Dataset',
+        'name': locale.site.title,
+        'description': `Comparison of key statistics between China and the rest of the world. ${locale.site.description}`,
+        'url': canonicalUrl,
+        'inLanguage': localeCode.replace('_', '-'),
+        'dateModified': new Date().toISOString().split('T')[0],
+        'datePublished': '2024-01-01',
+        'creator': {
+          '@type': 'Organization',
+          'name': 'China vs Rest of the World',
+          'url': baseUrl
+        },
+        'publisher': {
+          '@type': 'Organization',
+          'name': 'China vs Rest of the World',
+          'url': baseUrl
+        },
+        'dataSource': [
+          {
+            '@type': 'Organization',
+            'name': 'World Bank',
+            'url': 'https://data.worldbank.org/'
+          },
+          {
+            '@type': 'Organization',
+            'name': 'International Monetary Fund (IMF)',
+            'url': 'https://www.imf.org/en/Publications/WEO'
+          },
+          {
+            '@type': 'Organization',
+            'name': 'National Bureau of Statistics of China',
+            'url': 'https://data.stats.gov.cn/'
+          },
+          {
+            '@type': 'Organization',
+            'name': 'United Nations',
+            'url': 'https://data.un.org/'
+          }
+        ],
+        'keywords': ['China statistics', 'world comparison', 'population', 'GDP', 'economy', 'energy', '中国统计数据', '世界经济对比'],
+        'license': 'https://creativecommons.org/licenses/by/4.0/',
+        'citation': [
+          {
+            '@type': 'CreativeWork',
+            'name': 'World Bank Open Data',
+            'url': 'https://data.worldbank.org/'
+          },
+          {
+            '@type': 'CreativeWork',
+            'name': 'IMF World Economic Outlook',
+            'url': 'https://www.imf.org/en/Publications/WEO'
+          }
+        ]
+      },
+      {
+        '@type': 'WebPage',
+        'name': locale.site.title,
+        'description': locale.site.description,
+        'url': canonicalUrl,
+        'inLanguage': localeCode.replace('_', '-'),
+        'dateModified': new Date().toISOString().split('T')[0],
+        'author': {
+          '@type': 'Organization',
+          'name': 'China vs Rest of the World',
+          'url': baseUrl
+        },
+        'publisher': {
+          '@type': 'Organization',
+          'name': 'China vs Rest of the World',
+          'url': baseUrl
+        },
+        'about': {
+          '@type': 'Thing',
+          'name': 'Statistical Data Comparison',
+          'description': `Comprehensive statistical comparison between China and the rest of the world covering ${metrics.metrics.length} key metrics including population, economy, energy, agriculture, and manufacturing.`
+        }
+      }
+    ]
   };
   
   // Set locals for template
