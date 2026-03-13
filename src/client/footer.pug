@@ -3,12 +3,6 @@ footer.footer
   .container
     .footer-content
       .footer-section
-        h3= locale.footer.title
-        ul.footer-links
-          each source, key in data.links.dataSources
-            li
-              a(href=source.url, target='_blank', rel='noopener external', aria-label=source.name + ' (opens in new tab)')= source.name
-      .footer-section
         h3= locale.nav.about
         p.footer-description= locale.about.description
         p.footer-description= locale.about.purpose
