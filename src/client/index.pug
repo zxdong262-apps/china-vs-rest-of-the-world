@@ -61,48 +61,7 @@ html(lang=currentLocale, prefix='og: http://ogp.me/ns# website: http://ogp.me/ns
             p.hero-description= locale.site.description
         
         //- Data Table Section
-        section#data-table.section(aria-labelledby='data-table-title')
-          h2#data-table-title.section-title
-            span= locale.dataTable.dataTable
-            - var buttonId = 'downloadTableBtnTop'
-            - var btnClass = 'download-btn-top'
-            include download-button
-          .table-container
-            table.data-table#table(role='table', aria-describedby='table-desc')
-              caption.sr-only#table-desc Statistical comparison data between China and the rest of the world
-              thead
-                tr
-                  th#tableUrl.table-header-url(colspan=7, scope='colgroup')
-                tr
-                  th(scope='col')= locale.dataTable.category || 'Category'
-                  th(scope='col')= locale.regions.china
-                  th(colspan=2, scope='colgroup')= locale.regions.china + ' %'
-                  th(scope='col')= locale.regions.restOfWorld
-                  th(scope='col')= locale.regions.world
-                  th(scope='col')= locale.dataTable.year || 'Year'
-              tbody
-                each item in dataItems
-                  - const itemData = getDataByPath(data, item.path);
-                  - const itemLabel = locale.data[item.key];
-                  - const percent = Math.round(itemData.china / itemData.world * 100);
-                  tr
-                    th(scope='row').category
-                      span #{item.icon} #{itemLabel}
-                      span.unit-label  (#{locale.units[itemData.unit] || itemData.unit})
-                    td.china
-                      span.value= itemData.china
-                    td(colspan=2)
-                      .percent-bar-container
-                        .percent-bar(style='width:' + percent + '%', role='progressbar', aria-valuenow=percent, aria-valuemin='0', aria-valuemax='100')
-                        span.percent-label= percent + '%'
-                    td
-                      span.value= itemData.restOfWorld
-                    td
-                      span.value= itemData.world
-                    td= itemData.year
-          .download-section
-            - var buttonId = 'downloadTableBtn'
-            include download-button
+        include data-table
         
         //- Share Section
         include share-section
@@ -117,6 +76,10 @@ html(lang=currentLocale, prefix='og: http://ogp.me/ns# website: http://ogp.me/ns
     include footer-js
     
     script.
-      document.getElementById('tableUrl').textContent = window.location.href;
+      // Set URL text in table header
+      var urlText = document.querySelector('.url-text');
+      if (urlText) {
+        urlText.textContent = window.location.href;
+      }
     
 script(src='/js/background.js')

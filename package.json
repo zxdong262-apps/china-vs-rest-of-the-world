@@ -109,6 +109,7 @@
     "pug-runtime": "^3.0.1",
     "pug-strip-comments": "^2.0.0",
     "pug-walk": "^2.0.0",
+    "qrcode": "^1.5.4",
     "qs": "^6.15.0",
     "range-parser": "^1.2.1",
     "raw-body": "^3.0.2",

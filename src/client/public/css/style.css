@@ -509,6 +509,24 @@ body {
   font-weight: 600;
 }
 
+/* URL and QR Code in table header */
+.url-qr-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.url-text {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+.qr-code {
+  width: 60px;
+  height: 60px;
+}
+
 .download-section {
   text-align: right;
   margin-bottom: 2rem;

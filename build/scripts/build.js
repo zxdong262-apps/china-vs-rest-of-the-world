@@ -116,7 +116,10 @@ async function build() {
     console.log('Copied static assets');
   }
   
-  // Generate images
+  // Generate QR code images first
+  await generateQrCodes();
+  
+  // Generate table images
   await generateImages();
   
   console.log('Build complete!');
@@ -135,6 +138,23 @@ function generateImages() {
         resolve();
       } else {
         reject(new Error(`Image generation failed with code ${code}`));
+      }
+    });
+    child.on('error', reject);
+  });
+}
+
+function generateQrCodes() {
+  return new Promise((resolve, reject) => {
+    const scriptPath = path.join(__dirname, 'generate-qrcode.js');
+    const child = spawn('node', [scriptPath], {
+      stdio: 'inherit'
+    });
+    child.on('close', (code) => {
+      if (code === 0) {
+        resolve();
+      } else {
+        reject(new Error(`QR code generation failed with code ${code}`));
       }
     });
     child.on('error', reject);

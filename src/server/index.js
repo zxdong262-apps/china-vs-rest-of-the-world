@@ -177,6 +177,7 @@ app.get(['/', '/:locale'], (req, res) => {
   res.locals.canonicalUrl = canonicalUrl;
   res.locals.localeUrls = localeUrls;
   res.locals.jsonLd = jsonLd;
+  res.locals.isProduction = process.env.NODE_ENV === 'production';
   
   res.render('index');
 });

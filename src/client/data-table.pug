@@ -1,0 +1,50 @@
+//- Data Table Section
+section#data-table.section(aria-labelledby='data-table-title')
+  h2#data-table-title.section-title
+    span= locale.dataTable.dataTable
+    - var buttonId = 'downloadTableBtnTop'
+    - var btnClass = 'download-btn-top'
+    include download-button
+  .table-container
+    table.data-table#table(role='table', aria-describedby='table-desc')
+      caption.sr-only#table-desc Statistical comparison data between China and the rest of the world
+      thead
+        tr
+          th#tableUrl.table-header-url(colspan=7, scope='colgroup')
+            .url-qr-container
+              span.url-text
+              if isProduction
+                - var qrCodeName = currentLocale === 'en_US' ? 'qrcode-china-vs-rest-of-the-world.png' : 'qrcode-china-vs-rest-of-the-world-' + currentLocale + '.png'
+                img.qr-code(src='/images/' + qrCodeName, alt='QR Code')
+              else
+                img.qr-code#qrcode-dev(alt='QR Code')
+        tr
+          th(scope='col')= locale.dataTable.category || 'Category'
+          th(scope='col')= locale.regions.china
+          th(colspan=2, scope='colgroup')= locale.regions.china + ' %'
+          th(scope='col')= locale.regions.restOfWorld
+          th(scope='col')= locale.regions.world
+          th(scope='col')= locale.dataTable.year || 'Year'
+      tbody
+        each item in dataItems
+          - const itemData = getDataByPath(data, item.path);
+          - const itemLabel = locale.data[item.key];
+          - const percent = Math.round(itemData.china / itemData.world * 100);
+          tr
+            th(scope='row').category
+              span #{item.icon} #{itemLabel}
+              span.unit-label  (#{locale.units[itemData.unit] || itemData.unit})
+            td.china
+              span.value= itemData.china
+            td(colspan=2)
+              .percent-bar-container
+                .percent-bar(style='width:' + percent + '%', role='progressbar', aria-valuenow=percent, aria-valuemin='0', aria-valuemax='100')
+                span.percent-label= percent + '%'
+            td
+              span.value= itemData.restOfWorld
+            td
+              span.value= itemData.world
+            td= itemData.year
+  .download-section
+    - var buttonId = 'downloadTableBtn'
+    include download-button

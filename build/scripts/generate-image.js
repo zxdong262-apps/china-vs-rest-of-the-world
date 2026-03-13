@@ -120,19 +120,54 @@ async function generateImages() {
         throw e;
       }
       
-      // Set the production URL before capturing
-      await page.evaluate((url) => {
-        const urlCell = document.getElementById('tableUrl');
-        if (urlCell) {
-          urlCell.textContent = url;
-        }
-      }, productionUrl);
-      
-      // Wait for the table to be rendered
+      // Wait for the table to be rendered first
       await page.waitForSelector('#data-table', { timeout: 30000 });
       console.log('Table found!');
       
-      // Inject html2canvas and execute capture
+      // Read the pre-generated QR code PNG and convert to base64 data URL
+      // so it doesn't depend on the dev server's static file path
+      const qrCodeFileName = localeCode === defaultLocale
+        ? 'qrcode-china-vs-rest-of-the-world.png'
+        : `qrcode-china-vs-rest-of-the-world-${localeCode}.png`;
+      const qrCodeFilePath = path.join(IMAGES_DIR, qrCodeFileName);
+      const qrCodeBase64 = (await fs.readFile(qrCodeFilePath)).toString('base64');
+      const qrCodeDataUrl = `data:image/png;base64,${qrCodeBase64}`;
+
+      // Set the QR code using the pre-generated image as a data URL
+      await page.evaluate((url, qrCodeDataUrl) => {
+        const tableUrl = document.getElementById('tableUrl');
+        if (tableUrl) {
+          // Update the URL text
+          const urlText = tableUrl.querySelector('.url-text');
+          if (urlText) {
+            urlText.textContent = url;
+          }
+          
+          // Replace the QR code container (#qrcode-dev may be an <img> in dev mode,
+          // which is a void element and can't host qrcodejs-generated children).
+          // Replace it with a plain <img> using the pre-generated PNG data URL.
+          const qrCodeEl = tableUrl.querySelector('#qrcode-dev');
+          if (qrCodeEl) {
+            const img = document.createElement('img');
+            img.id = 'qrcode-dev';
+            img.className = 'qr-code';
+            img.src = qrCodeDataUrl;
+            img.alt = 'QR Code';
+            img.style.cssText = 'display: inline-block; vertical-align: middle; margin-left: 10px; width: 60px; height: 60px;';
+            qrCodeEl.replaceWith(img);
+          }
+        }
+      }, productionUrl, qrCodeDataUrl);
+      console.log('QR code image set!');
+
+      // Data URLs load synchronously, but wait briefly to ensure paint
+      await page.waitForFunction(() => {
+        const qrCodeEl = document.getElementById('qrcode-dev');
+        return qrCodeEl && qrCodeEl.tagName === 'IMG' && qrCodeEl.complete && qrCodeEl.naturalWidth > 0;
+      }, { timeout: 10000 });
+      console.log('QR code image loaded!');
+       
+       // Inject html2canvas and execute capture
       const imageBuffer = await page.evaluate(async () => {
         // Load html2canvas from CDN
         await new Promise((resolve, reject) => {
