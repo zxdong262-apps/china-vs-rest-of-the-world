@@ -67,11 +67,15 @@ script.
 // Generate QR code dynamically in dev mode
 script.
   document.addEventListener('DOMContentLoaded', function() {
-    var qrCodeDev = document.getElementById('qrcode-dev');
+    var qrCodeDev = document.getElementById('qr-code-wrap');
     if (!qrCodeDev) {
       return;
     }
-    
+
+    var qrCodeDevImg = document.getElementById('qrcode-dev');
+    if (qrCodeDevImg) {
+      qrCodeDevImg.remove();
+    }
     // Load qrcode library on-demand
     var qrcodeScript = document.createElement('script');
     qrcodeScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';

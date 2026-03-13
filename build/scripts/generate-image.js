@@ -119,7 +119,7 @@ async function generateImages() {
         }
         throw e;
       }
-      
+
       // Wait for the table to be rendered first
       await page.waitForSelector('#data-table', { timeout: 30000 });
       console.log('Table found!');
@@ -142,7 +142,7 @@ async function generateImages() {
           if (urlText) {
             urlText.textContent = url;
           }
-          
+
           // Replace the QR code container (#qrcode-dev may be an <img> in dev mode,
           // which is a void element and can't host qrcodejs-generated children).
           // Replace it with a plain <img> using the pre-generated PNG data URL.
@@ -153,7 +153,7 @@ async function generateImages() {
             img.className = 'qr-code';
             img.src = qrCodeDataUrl;
             img.alt = 'QR Code';
-            img.style.cssText = 'display: inline-block; vertical-align: middle; margin-left: 10px; width: 60px; height: 60px;';
+            img.style.cssText = 'display: inline-block; vertical-align: middle; width: 60px; height: 60px;';
             qrCodeEl.replaceWith(img);
           }
         }

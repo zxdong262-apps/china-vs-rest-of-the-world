@@ -512,9 +512,10 @@ body {
 /* URL and QR Code in table header */
 .url-qr-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
+  gap: 1rem;
 }
 
 .url-text {
@@ -525,6 +526,7 @@ body {
 .qr-code {
   width: 60px;
   height: 60px;
+  margin-right: 10px;
 }
 
 .download-section {

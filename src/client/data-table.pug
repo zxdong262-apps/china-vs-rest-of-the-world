@@ -12,12 +12,13 @@ section#data-table.section(aria-labelledby='data-table-title')
         tr
           th#tableUrl.table-header-url(colspan=7, scope='colgroup')
             .url-qr-container
-              span.url-text
               if isProduction
                 - var qrCodeName = currentLocale === 'en_US' ? 'qrcode-china-vs-rest-of-the-world.png' : 'qrcode-china-vs-rest-of-the-world-' + currentLocale + '.png'
                 img.qr-code(src='/images/' + qrCodeName, alt='QR Code')
               else
-                img.qr-code#qrcode-dev(alt='QR Code')
+                #qr-code-wrap
+                  img.qr-code#qrcode-dev(alt='QR Code')
+              span.url-text
         tr
           th(scope='col')= locale.dataTable.category || 'Category'
           th(scope='col')= locale.regions.china
