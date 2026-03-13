@@ -19,3 +19,12 @@ URL: [https://china-vs-rest-of-the-world.html5beta.com](https://china-vs-rest-of
 ## Contributing
 
 If you find any data errors, please feel free to submit a Pull Request to fix the data.
+
+## Other Projects
+
+- [China vs India](https://china-vs-india.html5beta.com)
+- [China VS India repo](https://github.com/zxdong262-apps/china-vs-india)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

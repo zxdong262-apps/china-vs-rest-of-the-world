@@ -41,6 +41,10 @@ const links = {
       name: 'html5beta.com',
       url: 'https://html5beta.com',
       description: 'author homepage'
+    },
+    'china-vs-india': {
+      name: 'China vs India',
+      url: 'https://china-vs-india.html5beta.com'
     }
   },
   
