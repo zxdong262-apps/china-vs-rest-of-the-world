@@ -1,0 +1,1 @@
+export const PRODUCTION_BASE_URL = 'https://china-vs-rest-of-the-world.html5beta.com'

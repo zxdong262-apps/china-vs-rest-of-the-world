@@ -20,7 +20,7 @@ const BUILD_DIR = path.join(__dirname, '../../public');
 const CLIENT_DIR = path.join(__dirname, '../../src/client');
 
 // Production base URL for SEO
-const PRODUCTION_BASE_URL = 'https://china-vs-rest-of-the-world.html5beta.com';
+import { PRODUCTION_BASE_URL } from './conf.js';
 
 const supportedLocales = locales.getSupportedLocales();
 const defaultLocale = supportedLocales[0];

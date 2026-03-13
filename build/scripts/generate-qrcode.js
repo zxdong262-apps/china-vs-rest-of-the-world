@@ -10,7 +10,7 @@ const rootDir = path.resolve(__dirname, '../..');
 const outputDir = path.join(rootDir, 'public/images');
 
 // Production base URL
-const PRODUCTION_BASE_URL = 'https://china-vs-rest-of-the-world.html5beta.com';
+import { PRODUCTION_BASE_URL } from './conf.js';
 
 const supportedLocales = locales.getSupportedLocales();
 const defaultLocale = supportedLocales[0];
