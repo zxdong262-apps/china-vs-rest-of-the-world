@@ -11,6 +11,7 @@ const metrics = [
   { key: 'electricityProduction', path: 'electricityProduction', category: 'energy', icon: '⚡' },
   { key: 'windPower', path: 'powerCapacity.windPower', category: 'energy', icon: '💨' },
   { key: 'solarPower', path: 'powerCapacity.solarPower', category: 'energy', icon: '☀️' },
+  { key: 'hydroPower', path: 'powerCapacity.hydroPower', category: 'energy', icon: '💧' },
   { key: 'coalProduction', path: 'coalProduction', category: 'energy', icon: '⛏️' },
   { key: 'steelProduction', path: 'steelProduction', category: 'metals', icon: '🔩' },
   { key: 'aluminum', path: 'manufacturing.aluminum', category: 'metals', icon: '🔧' },

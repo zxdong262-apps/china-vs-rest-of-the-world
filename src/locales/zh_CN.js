@@ -48,6 +48,7 @@ export default {
     manufacturingOutput: '制造业产出',
     windPower: '风电装机总量',
     solarPower: '太阳能装机总量',
+    hydroPower: '水电装机总量',
     energyProduction: '能源产量',
     agricultureProduction: '农业产量',
     grainProduction: '粮食产量',

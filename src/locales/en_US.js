@@ -48,6 +48,7 @@ export default {
     manufacturingOutput: 'Manufacturing Output',
     windPower: 'Wind Power',
     solarPower: 'Solar Power',
+    hydroPower: 'Hydropower',
     energyProduction: 'Energy Production',
     agricultureProduction: 'Agriculture Production',
     grainProduction: 'Grain Production',

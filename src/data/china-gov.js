@@ -167,6 +167,14 @@ const chinaGovData = {
       source: 'National Energy Administration of China',
       year: 2024,
       unit: 'GW'
+    },
+    hydroPower: {
+      china: 420,
+      restOfWorld: 800,
+      world: 1220,
+      source: 'National Energy Administration of China',
+      year: 2024,
+      unit: 'GW'
     }
   },
   
