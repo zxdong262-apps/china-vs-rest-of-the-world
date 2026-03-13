@@ -143,18 +143,18 @@ async function generateImages() {
             urlText.textContent = url;
           }
 
-          // Replace the QR code container (#qrcode-dev may be an <img> in dev mode,
-          // which is a void element and can't host qrcodejs-generated children).
-          // Replace it with a plain <img> using the pre-generated PNG data URL.
-          const qrCodeEl = tableUrl.querySelector('#qrcode-dev');
-          if (qrCodeEl) {
+          // After commit b724430, the QR code container is #qr-code-wrap (a div).
+          // Clear whatever qrcodejs may have put there and inject a plain <img>.
+          const qrWrap = tableUrl.querySelector('#qr-code-wrap');
+          if (qrWrap) {
+            qrWrap.innerHTML = '';
             const img = document.createElement('img');
-            img.id = 'qrcode-dev';
+            img.id = 'qrcode-img';
             img.className = 'qr-code';
             img.src = qrCodeDataUrl;
             img.alt = 'QR Code';
             img.style.cssText = 'display: inline-block; vertical-align: middle; width: 60px; height: 60px;';
-            qrCodeEl.replaceWith(img);
+            qrWrap.appendChild(img);
           }
         }
       }, productionUrl, qrCodeDataUrl);
@@ -162,8 +162,8 @@ async function generateImages() {
 
       // Data URLs load synchronously, but wait briefly to ensure paint
       await page.waitForFunction(() => {
-        const qrCodeEl = document.getElementById('qrcode-dev');
-        return qrCodeEl && qrCodeEl.tagName === 'IMG' && qrCodeEl.complete && qrCodeEl.naturalWidth > 0;
+        const img = document.getElementById('qrcode-img');
+        return img && img.tagName === 'IMG' && img.complete && img.naturalWidth > 0;
       }, { timeout: 10000 });
       console.log('QR code image loaded!');
        
