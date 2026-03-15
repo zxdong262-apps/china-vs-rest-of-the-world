@@ -23,7 +23,7 @@ If you find any data errors, please feel free to submit a Pull Request to fix th
 ## Other Projects
 
 - [China vs India](https://china-vs-india.html5beta.com)
-- [China VS India repo](https://github.com/zxdong262-apps/china-vs-india)
+- [China VS United States](https://china-vs-us.html5beta.com)
 
 ## License
 
