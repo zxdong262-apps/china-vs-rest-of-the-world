@@ -41,10 +41,26 @@ const links = {
       name: 'html5beta.com',
       url: 'https://html5beta.com',
       description: 'author homepage'
-    },
+    }
+  },
+
+  // Matrix project series
+  matrix: {
     'china-vs-india': {
       name: 'China vs India',
       url: 'https://china-vs-india.html5beta.com'
+    },
+    'china-vs-us': {
+      name: 'China vs United States',
+      url: 'https://china-vs-us.html5beta.com'
+    },
+    'china-vs-rest-of-the-world': {
+      name: 'China vs Rest of the World',
+      url: 'https://china-vs-rest-of-the-world.html5beta.com'
+    },
+    'guoshi': {
+      name: 'Guoshi - China\'s National Heroes',
+      url: 'https://guoshi.html5beta.com'
     }
   },
   

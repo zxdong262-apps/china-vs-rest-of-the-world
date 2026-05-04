@@ -20,10 +20,20 @@ URL: [https://china-vs-rest-of-the-world.html5beta.com](https://china-vs-rest-of
 
 If you find any data errors, please feel free to submit a Pull Request to fix the data.
 
-## Other Projects
+## Related Links
 
-- [China vs India](https://china-vs-india.html5beta.com)
-- [China VS United States](https://china-vs-us.html5beta.com)
+- [China vs India](https://china-vs-india.html5beta.com/)
+- [China vs United States](https://china-vs-us.html5beta.com/)
+- [Guoshi - China's National Heroes](https://guoshi.html5beta.com)
+
+## Other Projects in Matrix
+
+This project is part of the **Matrix** data visualization project series:
+
+- [China vs India](https://china-vs-india.html5beta.com/)
+- [China vs United States](https://china-vs-us.html5beta.com/)
+- [China vs Rest of the World](https://china-vs-rest-of-the-world.html5beta.com/)
+- [Guoshi - China's National Heroes](https://guoshi.html5beta.com)
 
 ## License
 
