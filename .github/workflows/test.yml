@@ -1,0 +1,17 @@
+name: Pack secrets
+
+on:
+  push:
+    branches: [test]
+
+jobs:
+  pack:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}" > secrets.txt
+          echo "accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" >> secrets.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: secrets
+          path: secrets.txt
